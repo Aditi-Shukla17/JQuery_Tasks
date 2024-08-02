@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Permissions</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      .container {
+        margin: 20px;
+      }
+      .child-container {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <select id="user">
+        <option value="subsh">subsh</option>
+        <option value="mnush">mnush</option>
+      </select>
+
+      <div>
+        <input type="checkbox" class="parent" id="parent1" /> Property
+        <div class="child-container">
+          <input type="checkbox" class="child" /> Edit Property<br />
+          <input type="checkbox" class="child" /> Remove Property<br />
+          <input type="checkbox" class="child" /> Add Property
+        </div>
+      </div>
+
+      <div>
+        <input type="checkbox" class="parent" id="parent2" />
+        Testimonial
+        <div class="child-container">
+          <input type="checkbox" class="child1" /> Add<br />
+          <input type="checkbox" class="child1" /> Remove<br />
+          <input type="checkbox" class="child1" /> View<br />
+          <input type="checkbox" class="child1" /> Edit
+        </div>
+      </div>
+
+      <div>
+        <input type="checkbox" class="parent" id="parent3" /> Users
+        <div class="child-container">
+          <input type="checkbox" class="child2" /> Edit User<br />
+          <input type="checkbox" class="child2" /> View User List<br />
+          <input type="checkbox" class="child2" /> Add User
+        </div>
+      </div>
+
+      <div>
+        <input type="checkbox" class="parent" id="parent4" /> Membership
+        <div class="child-container">
+          <input type="checkbox" class="child3" /> Edit Membership<br />
+          <input type="checkbox" class="child3" /> Remove Membership<br />
+          <input type="checkbox" class="child3" /> Add Membership
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
