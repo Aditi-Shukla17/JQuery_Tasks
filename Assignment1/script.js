@@ -2,10 +2,10 @@ $(document).ready(function () {
   $("#form1").submit(function (event) {
     event.preventDefault();
 
-    let email = $("#email").val();
-    let password = $("#password").val();
-    let confirmPassword = $("#confirmPassword").val();
-    let agree = $("#agree").is(":checked");
+    const email = $("#email").val();
+    const password = $("#password").val();
+    const confirmPassword = $("#confirmPassword").val();
+    const agree = $("#agree").is(":checked");
 
     if (email === "") {
       alert("Email is required.");
