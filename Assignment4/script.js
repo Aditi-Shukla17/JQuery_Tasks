@@ -38,7 +38,6 @@ $(document).ready(function () {
     const $rows = $("#image-container .image-row");
     let primarySelected = false;
 
-    // Check if any select element has value "primary"
     $rows.each(function () {
       const $select = $(this).find("select");
       if ($select.val() === "primary") {
@@ -46,13 +45,11 @@ $(document).ready(function () {
       }
     });
 
-    // If no primary is selected, set the first select element to "primary"
     if (!primarySelected && $rows.length > 0) {
       $rows.first().find("select").val("primary");
-      primarySelected = true;  // Set flag to true as we have selected primary
+      primarySelected = true;
     }
 
-    // Ensure only one primary image is selected
     $rows.each(function () {
       const $select = $(this).find("select");
       $select.off("change").on("change", function () {
@@ -63,8 +60,11 @@ $(document).ready(function () {
             }
           });
         } else {
-          // If this was the only primary and it changed to secondary, ensure at least one primary
-          if (!$rows.find("select").filter(function() { return $(this).val() === "primary"; }).length) {
+          if (
+            !$rows.find("select").filter(function () {
+              return $(this).val() === "primary";
+            }).length
+          ) {
             $rows.first().find("select").val("primary");
           }
         }
