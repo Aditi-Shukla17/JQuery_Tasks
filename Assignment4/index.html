@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Image Upload</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <style>
-      .image-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .image-row input[type="file"] {
-        margin-right: 10px;
-      }
-      .image-row select {
-        margin-right: 10px;
-      }
-      .image-row a {
-        color: red;
-        cursor: pointer;
-        text-decoration: none;
-        margin-left: 10px;
-      }
-    </style>
-  </head>
-  <body style="display: flex; justify-content: center; align-items: center">
-    <div id="image-container">
-      <div class="image-row">
-        <input type="file" />
-        <select>
-          <option value="primary" selected >Primary Image</option>
-          <option value="secondary">Secondary Image</option>
-        </select>
-        <a href="#" class="remove" onclick="removeRow(this)">Remove</a>
-      </div>
+</head>
+<body>
+    <div id="header">
+        <a href="#" id="add-btn" class="header-btn">Add</a>
+        <a href="#" id="delete-btn" class="header-btn">Delete</a>
     </div>
-    <a href="#" id="add-row-button" onclick="addRow()">Add Another</a>
+    <div id="image-container">
+        <div class="image-row">
+            <input type="checkbox" class="row-checkbox" />
+            <input type="file" />
+            <img src="https://via.placeholder.com/100" alt="Image Preview" />
+            <select>
+                <option value="primary" selected>Primary Image</option>
+                <option value="secondary">Secondary Image</option>
+            </select>
+            <a href="#" class="remove" onclick="removeRow($(this))"><i class="fa-solid fa-trash"></i></a>
+        </div>
+    </div>
 
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
