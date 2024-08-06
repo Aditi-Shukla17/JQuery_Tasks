@@ -14,7 +14,6 @@ $(document).ready(function () {
   });
 
   function addRow() {
-    // Check if there's any row with an empty file input
     const $emptyRows = $("#image-container .image-row").filter(function () {
       return $(this).find("input[type='file']").val() === "";
     });
@@ -104,7 +103,6 @@ $(document).ready(function () {
     const $rows = $("#image-container .image-row");
     let primarySelected = false;
 
-    // Check if there's a primary image
     $rows.each(function () {
       const $select = $(this).find("select");
       if ($select.val() === "primary") {
@@ -112,13 +110,11 @@ $(document).ready(function () {
       }
     });
 
-    // Set the first row as primary if none are selected
     if (!primarySelected && $rows.length > 0) {
       $rows.first().find("select").val("primary");
       primarySelected = true;
     }
 
-    // Update the primary selection on change
     $rows.each(function () {
       const $select = $(this).find("select");
       $select.off("change").on("change", function () {
