@@ -1,5 +1,7 @@
 $(document).ready(function () {
-  initialize();
+  // Initialize event listeners for existing file inputs
+  initializeFileInputListeners();
+
   $("#add-btn").on("click", function (e) {
     e.preventDefault();
     addRow();
@@ -29,7 +31,8 @@ $(document).ready(function () {
     const $file = $("<input>").attr("type", "file");
     const $img = $("<img>")
       .attr("src", "https://via.placeholder.com/100")
-      .attr("alt", "Image Preview");
+      .attr("alt", "Image Preview")
+      .css("display", "none"); // Hide initially
 
     const $select = $("<select>").html(`
       <option value="primary">Primary Image</option>
@@ -46,7 +49,7 @@ $(document).ready(function () {
       .html('<i class="fa-solid fa-trash"></i>');
     $remove.on("click", function (e) {
       e.preventDefault();
-      removeRow($(this));
+      removeRow($(this).closest(".image-row"));
     });
 
     $file.on("change", function () {
@@ -54,11 +57,11 @@ $(document).ready(function () {
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-          $img.attr("src", e.target.result);
+          $img.attr("src", e.target.result).show(); // Display the image
         };
         reader.readAsDataURL(file);
       } else {
-        $img.attr("src", "https://via.placeholder.com/100");
+        $img.attr("src", "https://via.placeholder.com/100").hide(); // Hide if no file
       }
     });
 
@@ -74,8 +77,7 @@ $(document).ready(function () {
     updatePrimary();
   }
 
-  function removeRow($link) {
-    const $row = $link.closest(".image-row");
+  function removeRow($row) {
     const $select = $row.find("select");
     if ($select.val() === "primary") {
       alert("You cannot remove the primary image.");
@@ -138,7 +140,8 @@ $(document).ready(function () {
       removeRow($(this).closest(".image-row"));
     });
   }
-  function initialize() {
+
+  function initializeFileInputListeners() {
     $("#image-container .image-row input[type='file']").each(function () {
       $(this)
         .off("change")
@@ -148,11 +151,11 @@ $(document).ready(function () {
           if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
-              $img.attr("src", e.target.result).show();
+              $img.attr("src", e.target.result).show(); // Display the image
             };
             reader.readAsDataURL(file);
           } else {
-            $img.attr("src", "https://via.placeholder.com/100").hide();
+            $img.attr("src", "https://via.placeholder.com/100").hide(); // Hide if no file
           }
         });
     });

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Image Upload</title>
@@ -13,25 +13,29 @@
       referrerpolicy="no-referrer"
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <div id="header">
-        <a href="#" id="add-btn" class="header-btn">Add</a>
-        <a href="#" id="delete-btn" class="header-btn">Delete</a>
+  </head>
+  <body>
+    <div id="delete-container">
+      <a href="#" id="delete-btn" onclick="deleteChecked()">Delete</a>
     </div>
     <div id="image-container">
-        <div class="image-row">
-            <input type="checkbox" class="row-checkbox" />
-            <input type="file" />
-            <img src="https://via.placeholder.com/100" alt="Image Preview" />
-            <select>
-                <option value="primary" selected>Primary Image</option>
-                <option value="secondary">Secondary Image</option>
-            </select>
-            <a href="#" class="remove" onclick="removeRow($(this))"><i class="fa-solid fa-trash"></i></a>
-        </div>
+      <div class="add">
+        <a href="#" id="add-btn">Add</a>
+      </div>
+      <div class="image-row">
+        <input type="checkbox" class="row-checkbox" />
+        <input type="file" />
+        <img src="https://via.placeholder.com/100" alt="Image Preview" />
+        <select>
+          <option value="primary" selected>Primary Image</option>
+          <option value="secondary">Secondary Image</option>
+        </select>
+        <a href="#" class="remove" onclick="removeRow($(this))">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
