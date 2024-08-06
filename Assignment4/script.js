@@ -1,6 +1,7 @@
 $(document).ready(function () {
-  // Initialize event listeners for existing file inputs
-  initializeFileInputListeners();
+  let imageCount = 0;
+
+  initialize();
 
   $("#add-btn").on("click", function (e) {
     e.preventDefault();
@@ -28,11 +29,20 @@ $(document).ready(function () {
     const $container = $("#image-container");
     const $newRow = $("<div>").addClass("image-row");
 
-    const $file = $("<input>").attr("type", "file");
+    const fileId = `filetype-${imageCount}`;
+    const imgId = `image-${imageCount}`;
+
+    const $file = $("<input>").attr("type", "file").attr("id", fileId);
+
+    const $label = $("<label>")
+      .attr("for", fileId)
+      .attr("id", "textadd")
+      .html('<i class="fa-solid fa-image"></i> Add Image');
+
     const $img = $("<img>")
       .attr("src", "https://via.placeholder.com/100")
       .attr("alt", "Image Preview")
-      .css("display", "none"); // Hide initially
+      .attr("id", imgId);
 
     const $select = $("<select>").html(`
       <option value="primary">Primary Image</option>
@@ -49,7 +59,7 @@ $(document).ready(function () {
       .html('<i class="fa-solid fa-trash"></i>');
     $remove.on("click", function (e) {
       e.preventDefault();
-      removeRow($(this).closest(".image-row"));
+      removeRow($(this));
     });
 
     $file.on("change", function () {
@@ -57,27 +67,30 @@ $(document).ready(function () {
       if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-          $img.attr("src", e.target.result).show(); // Display the image
+          $(`#${imgId}`).attr("src", e.target.result).show();
         };
         reader.readAsDataURL(file);
       } else {
-        $img.attr("src", "https://via.placeholder.com/100").hide(); // Hide if no file
+        $(`#${imgId}`).attr("src", "https://via.placeholder.com/100");
       }
     });
 
     $newRow.append(
       $("<input>").attr("type", "checkbox").addClass("row-checkbox"),
-      $file,
+      $file.hide(),
+      $label,
       $img,
       $select,
       $remove
     );
     $container.append($newRow);
 
+    imageCount++;
     updatePrimary();
   }
 
-  function removeRow($row) {
+  function removeRow($link) {
+    const $row = $link.closest(".image-row");
     const $select = $row.find("select");
     if ($select.val() === "primary") {
       alert("You cannot remove the primary image.");
@@ -141,7 +154,7 @@ $(document).ready(function () {
     });
   }
 
-  function initializeFileInputListeners() {
+  function initialize() {
     $("#image-container .image-row input[type='file']").each(function () {
       $(this)
         .off("change")
@@ -151,13 +164,20 @@ $(document).ready(function () {
           if (file) {
             const reader = new FileReader();
             reader.onload = function (e) {
-              $img.attr("src", e.target.result).show(); // Display the image
+              $img.attr("src", e.target.result).show();
             };
             reader.readAsDataURL(file);
           } else {
-            $img.attr("src", "https://via.placeholder.com/100").hide(); // Hide if no file
+            $img.attr("src", "https://via.placeholder.com/100").hide();
           }
         });
     });
+
+    $(".remove").on("click", function (e) {
+      e.preventDefault();
+      removeRow($(this));
+    });
+
+    updatePrimary();
   }
 });
